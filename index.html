@@ -26,7 +26,7 @@ Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></span>
 <span><strong>OC:</strong> Let&hellip;<br></span>
 </div>
 <div style="position: fixed; bottom: 0;">
-<form method="POST" action="#">
+<form id="ask" method="POST" action="#">
 <textarea style="display: block; width: 500px;" name="entry" rows="2" placeholder="Enter your query..."></textarea>
 <button style="display: block;" type="submit">Ask</button>
 </form>
@@ -36,6 +36,13 @@ Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></span>
 </div>
 </body>
 <script>
+document.querySelector("#ask")
+  .addEventListener("keydown", function (e) {
+    if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
+      e.preventDefault();
+      e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
+    }
+  });
 renderMathInElement(
     document.querySelector("#chat"),
     { delimiters:
