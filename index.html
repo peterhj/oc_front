@@ -7,13 +7,27 @@
 <script src="katex.min.js"></script>
 <script src="auto-render.min.js"></script>
 <style>
+h1 { font-size: 1.25rem; font-weight: normal; margin-left: 0; margin-right: 0; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1; }
+.rhs { font-size: 0.9rem; margin-left: 0.625em; margin-right: 0; margin-top: 0.5625rem; margin-bottom: 0.5625rem; line-height: 2.5; }
 </style>
 </head>
 <body>
 <div id="container">
 <div id="foo"></div>
 <div id="bar"></div>
-<div id="chat" style="width: 500px; height: 500px; background-color: #ccc;">
+<div style="position: fixed; top: 0; width: 500px; background-color: #fff; z-index: 1;">
+<div class="fl">
+<h1>Olympiad Chat</h1>
+</div>
+<div class="fr">
+<span class="rhs sans-serif">+new</span>
+<span class="rhs sans-serif">archived</span>
+<span class="rhs sans-serif">user settings</span>
+</div>
+<div class="cb-ns"></div>
+</div>
+<div style="height: 36px;"></div>
+<div id="chat" style="width: 500px; height: 1000px; background-color: #dedede;">
 <!--<textarea style="display: block; width: 500px;" name="response" rows="80" placeholder="Awaiting response..."></textarea>-->
 <span><strong>User:</strong>
 In an acute triangle \(ABC\) the points $D$, $E$ and $F$ are the feet of the
@@ -23,9 +37,10 @@ respectively;
 the circumcenters of the triangles $ACI_1$ and $BCI_2$ are $O_1$ and $O_2$
 respectively.
 Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></span>
+<span><strong>OC:</strong> <em>[thinking]</em><br></span>
 <span><strong>OC:</strong> Let&hellip;<br></span>
 </div>
-<div style="position: fixed; bottom: 0;">
+<div style="position: fixed; bottom: 0; background-color: #fff; z-index: 2;">
 <form id="ask" method="POST" action="#">
 <textarea style="display: block; width: 500px;" name="entry" rows="2" placeholder="Enter your query..."></textarea>
 <button style="display: block;" type="submit">Ask</button>
