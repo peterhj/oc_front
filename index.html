@@ -2,13 +2,16 @@
 <html lang="en-us">
 <head>
 <meta charset="utf-8">
-<!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">-->
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 <link rel="stylesheet" href="tachyons.css">
 <link rel="stylesheet" href="katex.min.css">
 <style>
-#container { padding-left: 9px; padding-right: 9px; }
-#header { position: fixed; top: 0; width: 500px; border-bottom: 1px solid #777; background-color: #fff; z-index: 1; }
-#chat { width: 500px; height: 1000px; padding: 9px; background-color: #f9f9f9; }
+body { background-color: #ededed; }
+#container { width: 518px; margin-left: auto; margin-right: auto; background-color: #fff; }
+#header { position: fixed; top: 0; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 1px solid #777; background-color: #fff; z-index: 1; }
+#chatwrap { width: 518px; /*padding-left: 9px; padding-right: 9px;*/ }
+#chat { width: 518px; height: 1000px; padding: 9px; background-color: #f9f9f9; }
+#askwrap { padding: 9px; border-top: 1px solid #777; background-color: #fff; }
 h1 { font-size: 1.25rem; font-weight: normal; margin-left: 0; margin-right: 0; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1; }
 h1 a { color: #000; text-decoration: none; }
 .rhs { font-size: 0.9rem; margin-left: 0.625em; margin-right: 0; margin-top: 0.5625rem; margin-bottom: 0.5625rem; line-height: 2.5; }
@@ -33,16 +36,20 @@ h1 a { color: #000; text-decoration: none; }
 <div id="bar"></div>-->
 <div id="header">
 <div class="fl">
-<h1><a href="#">Olympiad Chat</a></h1>
+<h1><a href="#">OlympiadChat</a></h1>
+</div>
+<div class="fl">
+<span class="rhs sans-serif gray">[build: &alpha;-20231210]</span>
 </div>
 <div class="fr">
 <span class="rhs sans-serif"><a href="#">+new</a></span>
-<span class="rhs sans-serif"><a href="#">archived</a></span>
-<span class="rhs sans-serif"><a href="#">settings</a></span>
+<span class="rhs sans-serif"><a href="#">log</a></span>
+<span class="rhs sans-serif"><a href="#">examples</a></span>
 </div>
 <div class="cb-ns"></div>
 </div>
 <div style="height: 36px;"></div>
+<div id="chatwrap">
 <div id="chat">
 <!--<textarea style="display: block; width: 500px;" name="response" rows="80" placeholder="Awaiting response..."></textarea>-->
 <div id="in_template" class="in_"><strong class="in_label">In [<span class="nr in_nr">0</span>]:</strong> <span></span><br></div>
@@ -55,19 +62,19 @@ respectively;
 the circumcenters of the triangles $ACI_1$ and $BCI_2$ are $O_1$ and $O_2$
 respectively.
 Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></div>
-<div class="out"><em><span class="outlabel">Out[2]:</span> [waiting for OC to respond&hellip;]</em><br></div>
-<div class="out"><strong class="outlabel">Out[2]:</strong> <em>[I am thinking.]</em><br></div>
+<div class="out"><em><span class="outlabel">Out[2]:</span> [Waiting for OlympiadChat to respond&hellip;]</em><br></div>
+<div class="out"><strong class="outlabel">Out[2]:</strong> <em>[OlympiadChat is thinking.]</em><br></div>
 <div class="out"><strong class="outlabel">Out[2]:</strong> Let&hellip;<br></div>
-</div>
-<div style="position: fixed; bottom: 0; background-color: #fff; z-index: 2;">
+<div class="out"><em><span class="outlabel">Out[2]:</span> [Thank you for trying an early preview of OlympiadChat. Please check back soon for new functionality.]</em><br></div>
+</div><!--#chat-->
+</div><!--#chatwrap-->
+<div id="askwrap" style="position: fixed; bottom: 0; background-color: #fff; z-index: 2;">
 <form id="ask" method="POST" action="#">
 <textarea style="display: block; width: 500px;" name="entry" rows="2" placeholder="Enter your query..."></textarea>
 <button style="display: block;" type="submit">Ask</button>
 </form>
 </div>
-<div>
-</div>
-</div>
+</div><!--#container-->
 </body>
 <script>
 (function () {
@@ -94,7 +101,7 @@ req.open("GET", "");
 req.send();
 */
 var tmp = document.querySelector("#outtemplate");
-console.log(tmp.id);
+//console.log(tmp.id);
 var tmp2 = tmp.cloneNode(true);
 tmp2.removeAttribute("id");
 tmp2.querySelector(".nr").textContent = "3";
