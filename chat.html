@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+<link rel="stylesheet" href="tachyons.css">
+<link rel="stylesheet" href="katex.min.css">
+<style>
+body { background-color: #ededed; }
+#container { width: 518px; margin-left: auto; margin-right: auto; background-color: #fff; }
+#header { position: fixed; top: 0; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 1px solid #777; background-color: #fff; z-index: 1; }
+#chatwrap { width: 518px; /*padding-left: 9px; padding-right: 9px;*/ }
+#chat { width: 518px; height: 1000px; padding: 9px; background-color: #f9f9f9; }
+#askwrap { padding: 9px; border-top: 1px solid #777; background-color: #fff; }
+h1 { font-size: 1.25rem; font-weight: normal; margin-left: 0; margin-right: 0; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1; }
+h1 a { color: #000; text-decoration: none; }
+.rhs { font-size: 0.9rem; margin-left: 0.625em; margin-right: 0; margin-top: 0.5625rem; margin-bottom: 0.5625rem; line-height: 2.5; }
+.rhs a { color: #000; }
+.rhs a:hover, .rhs a:focus { color: #666; }
+.in_ {}
+.in_label { color: #00789a; font-family: monospace; }
+.in_nr {}
+#in_template { display: none; }
+.out { background-color: #ededed; }
+.outlabel { color: #dc5600; font-family: monospace; }
+.outnr {}
+#outtemplate { display: none; }
+.katex { font-size: 1em; }
+</style>
+<script src="katex.min.js"></script>
+<script src="auto-render.min.js"></script>
+</head>
+<body>
+<div id="container">
+<!--<div id="foo"></div>
+<div id="bar"></div>-->
+<div id="header">
+<div class="fl">
+<h1><a href="#">OlympiadChat</a></h1>
+</div>
+<div class="fl">
+<span class="rhs sans-serif gray">[build: &alpha;-20231210]</span>
+</div>
+<div class="fr">
+<span class="rhs sans-serif"><a href="#">+new</a></span>
+<span class="rhs sans-serif"><a href="#">log</a></span>
+<span class="rhs sans-serif"><a href="#">examples</a></span>
+</div>
+<div class="cb-ns"></div>
+</div>
+<div style="height: 36px;"></div>
+<div id="chatwrap">
+<div id="chat">
+<!--<textarea style="display: block; width: 500px;" name="response" rows="80" placeholder="Awaiting response..."></textarea>-->
+<div id="in_template" class="in_"><strong class="in_label">In [<span class="nr in_nr">0</span>]:</strong> <span></span><br></div>
+<div id="outtemplate" class="out"><strong class="outlabel">Out[<span class="nr outnr">0</span>]:</strong> <span></span><br></div>
+<div class="in_"><strong class="in_label">In [1]:</strong>
+In an acute triangle \(ABC\) the points $D$, $E$ and $F$ are the feet of the
+altitudes through $A$, $B$ and $C$ respectively.
+The incenters of the triangles $DEF$ and $BDF$ are $I_1$ and $I_2$
+respectively;
+the circumcenters of the triangles $ACI_1$ and $BCI_2$ are $O_1$ and $O_2$
+respectively.
+Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></div>
+<div class="out"><em><span class="outlabel">Out[2]:</span> [Waiting for OlympiadChat to respond&hellip;]</em><br></div>
+<div class="out"><strong class="outlabel">Out[2]:</strong> <em>[OlympiadChat is thinking.]</em><br></div>
+<div class="out"><strong class="outlabel">Out[2]:</strong> Let&hellip;<br></div>
+<div class="out"><em><span class="outlabel">Out[2]:</span> [Thank you for trying a prototype of OlympiadChat. Please check back soon for new functionality.]</em><br></div>
+</div><!--#chat-->
+</div><!--#chatwrap-->
+<div id="askwrap" style="position: fixed; bottom: 0; background-color: #fff; z-index: 2;">
+<form id="ask" method="POST" action="#">
+<textarea style="display: block; width: 500px;" name="entry" rows="2" placeholder="Enter your query..."></textarea>
+<button style="display: block;" type="submit">Ask</button>
+</form>
+</div>
+</div><!--#container-->
+</body>
+<script>
+(function () {
+document.querySelector("#ask")
+  .addEventListener("keydown", function (e) {
+    if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
+      e.preventDefault();
+      e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
+    }
+  });
+renderMathInElement(
+    document.querySelector("#chat"),
+    { delimiters:
+      [{left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false},
+       {left: "\\(", right: "\\)", display: false},
+       {left: "\\[", right: "\\]", display: true}]
+    }
+);
+/*
+var req = new XMLHttpRequest();
+//req.addEventListener("load", _);
+req.open("GET", "");
+req.send();
+*/
+var tmp = document.querySelector("#outtemplate");
+//console.log(tmp.id);
+var tmp2 = tmp.cloneNode(true);
+tmp2.removeAttribute("id");
+tmp2.querySelector(".nr").textContent = "3";
+var chat = document.querySelector("#chat");
+chat.appendChild(tmp2);
+})();
+</script>
+<!--<script>
+var ctx = {};
+var body = document.querySelector("body");
+var foo = document.querySelector("#foo");
+var bar = document.querySelector("#bar");
+console.log(body);
+console.log(foo);
+console.log(bar);
+var p = document.createElement("p");
+console.log(p);
+var ret = foo.appendChild(p);
+var a = document.createElement("a");
+var ret2 = foo.replaceChild(a, p);
+var p2 = document.createElement("p");
+foo.appendChild(p2);
+</script>-->
+</html>
