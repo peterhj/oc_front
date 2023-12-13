@@ -6,6 +6,10 @@ document.querySelector("#ask")
       e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
     }
   });
+document.querySelector("#ask")
+  .addEventListener("onsubmit", function (e) {
+    console.log("Ask and ye shall receive.");
+  });
 renderMathInElement(
     document.querySelector("#chat"),
     { delimiters:
@@ -16,10 +20,11 @@ renderMathInElement(
     }
 );
 /*
-var req = new XMLHttpRequest();
-//req.addEventListener("load", _);
-req.open("GET", "");
-req.send();
+var hi_req = new XMLHttpRequest();
+hi_req.addEventListener("load", function (e) {
+});
+hi_req.open("POST", "{{host}}/api/hi");
+hi_req.send();
 */
 var tmp = document.querySelector("#outtemplate");
 //console.log(tmp.id);

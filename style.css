@@ -4,9 +4,9 @@ h1 a { color: #000; text-decoration: none; }
 .rhs { font-size: 0.9rem; margin-left: 0.625em; margin-right: 0; margin-top: 0.5625rem; margin-bottom: 0.5625rem; line-height: 2.5; }
 .rhs a { color: #000; }
 .rhs a:hover, .rhs a:focus { color: #666; }
-#container { width: 518px; margin-left: auto; margin-right: auto; background-color: #fff; }
-#header { position: fixed; top: 0; z-index: 1; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 1px solid #777; background-color: #fff; }
-#chatpadtop { height: 36px; }
+#container { width: 518px; margin-left: auto; margin-right: auto; background-color: #f9f9f9; }
+#header { position: fixed; top: 0; z-index: 1; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 3px solid #bcf682; background-color: #fff; }
+#chatwraptop { height: 39px; }
 #chatwrap { width: 518px; /*padding-left: 9px; padding-right: 9px;*/ }
 #chat { width: 518px; height: 1000px; padding: 9px; background-color: #f9f9f9; }
 #askwrap { position: fixed; bottom: 0; z-index: 2; padding: 9px; border-top: 1px solid #777; background-color: #fff; }
