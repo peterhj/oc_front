@@ -1,16 +1,22 @@
 (function () {
-document.querySelector("#ask")
-  .addEventListener("keydown", function (e) {
-    if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
-      e.preventDefault();
-      e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
-    }
-  });
-document.querySelector("#ask")
-  .addEventListener("submit", function (e) {
+var on_keydown = function (e) {
+  if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
-    console.log("Ask and ye shall receive.");
-  });
+    e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
+  }
+  document.querySelector("#ask")
+    .addEventListener("keydown", on_keydown);
+};
+document.querySelector("#ask")
+  .addEventListener("keydown", on_keydown);
+var on_submit = function (e) {
+  e.preventDefault();
+  console.log("Ask and ye shall receive.");
+  document.querySelector("#ask")
+    .addEventListener("submit", on_submit);
+};
+document.querySelector("#ask")
+  .addEventListener("submit", on_submit);
 renderMathInElement(
     document.querySelector("#chat"),
     { delimiters:
