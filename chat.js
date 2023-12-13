@@ -7,7 +7,7 @@ document.querySelector("#ask")
     }
   });
 document.querySelector("#ask")
-  .addEventListener("onsubmit", function (e) {
+  .addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("Ask and ye shall receive.");
   });
