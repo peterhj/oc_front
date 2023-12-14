@@ -4,6 +4,7 @@ var ctx_post_inc = 0;
 var ctx_post_seq_nr = 0;
 var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
+var ctx_poll_req = null;
 var on_keydown = function (e) {
   if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
@@ -12,17 +13,48 @@ var on_keydown = function (e) {
 };
 document.querySelector("#ask")
   .addEventListener("keydown", on_keydown);
-var poll_req = null;
+var fresh_hi = function () {
+  var req = new XMLHttpRequest();
+  req.open("POST", "{{host}}/wapi/hi", false);
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 201) {
+      console.log("hi " + req.status);
+      var rep = JSON.parse(req.response);
+      console.log("hi: seq_nr=" + rep.seq_nr);
+      // FIXME: initialize ctx.
+    }
+  };
+  req.send();
+};
+/*var fresh_poll = function () {
+  var req = new XMLHttpRequest();
+  req.open("POST", "{{host}}/wapi/poll", false);
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 201) {
+      var rep = JSON.parse(req.response);
+      // TODO TODO
+    }
+  };
+  // FIXME: params?
+  req.send();
+};*/
+/*var fresh_post = function () {
+  var req = new XMLHttpRequest();
+  req.open("POST", "{{host}}/wapi/post", false);
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 201) {
+      var rep = JSON.parse(req.response);
+      // TODO TODO
+    }
+  };
+  // FIXME: params?
+  req.send();
+};*/
 var on_submit = function (e) {
   e.preventDefault();
   console.log("Ask and ye shall receive.");
   if (!ctx_post_seq_nr) {
-    var hi_req = new XMLHttpRequest();
-    hi_req.addEventListener("load", function (e) {
-      console.log("hi");
-    });
-    hi_req.open("POST", "{{host}}/wapi/hi");
-    hi_req.send();
+    fresh_hi();
   }
   /*
   var post_req = new XMLHttpRequest();
@@ -31,12 +63,12 @@ var on_submit = function (e) {
   post_req.open("POST", "{{host}}/wapi/post");
   post_req.send();
   // TODO TODO: long polling for reply.
-  poll_req = new XMLHttpRequest();
+  ctx_poll_req = new XMLHttpRequest();
   while (true) {
-    poll_req.readystatechange = function () {
+    ctx_poll_req.readystatechange = function () {
     };
-    poll_req.open("POST", "{{host}}/wapi/poll");
-    poll_req.send();
+    ctx_poll_req.open("POST", "{{host}}/wapi/poll");
+    ctx_poll_req.send();
   }
   */
 };
@@ -51,27 +83,16 @@ renderMathInElement(
        {left: "\\[", right: "\\]", display: true}]
     }
 );
-var tmp = document.querySelector("#outtemplate");
-//console.log(tmp.id);
-var tmp2 = tmp.cloneNode(true);
-tmp2.removeAttribute("id");
-tmp2.querySelector(".nr").textContent = "2";
-var chat = document.querySelector("#chat");
-chat.appendChild(tmp2);
+(function () {
+  var tmp = document.querySelector("#outtemplate");
+  //console.log(tmp.id);
+  var tmp2 = tmp.cloneNode(true);
+  tmp2.removeAttribute("id");
+  tmp2.querySelector(".nr").textContent = "2";
+  var chat = document.querySelector("#chat");
+  chat.appendChild(tmp2);
+})();
 if (!ctx_post_seq_nr) {
-  var hi_req = new XMLHttpRequest();
-  hi_req.open("POST", "{{host}}/wapi/hi", true);
-  /*hi_req.addEventListener("load", function (e) {
-    console.log("hi");
-  });*/
-  hi_req.onreadystatechange = function () {
-    if (hi_req.readyState == 4) {
-      console.log("hi " + hi_req.status);
-      (function (rep) {
-        console.log("hi: seq_nr=" + rep.seq_nr);
-      })(JSON.parse(hi_req.response));
-    }
-  };
-  hi_req.send();
+  fresh_hi();
 }
 })();
