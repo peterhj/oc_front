@@ -16,25 +16,26 @@ var poll_req = null;
 var on_submit = function (e) {
   e.preventDefault();
   console.log("Ask and ye shall receive.");
-  /*
-  if (!ctx_seq_nr) {
+  if (!ctx_post_seq_nr) {
     var hi_req = new XMLHttpRequest();
     hi_req.addEventListener("load", function (e) {
+      console.log("hi");
     });
-    hi_req.open("POST", "{{host}}/api/hi");
+    hi_req.open("POST", "{{host}}/wapi/hi");
     hi_req.send();
   }
+  /*
   var post_req = new XMLHttpRequest();
   post_req.addEventListener("load", function (e) {
   });
-  post_req.open("POST", "{{host}}/api/post");
+  post_req.open("POST", "{{host}}/wapi/post");
   post_req.send();
   // TODO TODO: long polling for reply.
   poll_req = new XMLHttpRequest();
   while (true) {
     poll_req.readystatechange = function () {
     };
-    poll_req.open("POST", "{{host}}/api/poll");
+    poll_req.open("POST", "{{host}}/wapi/poll");
     poll_req.send();
   }
   */
