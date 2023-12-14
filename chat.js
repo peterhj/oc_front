@@ -58,4 +58,12 @@ tmp2.removeAttribute("id");
 tmp2.querySelector(".nr").textContent = "3";
 var chat = document.querySelector("#chat");
 chat.appendChild(tmp2);
+if (!ctx_post_seq_nr) {
+  var hi_req = new XMLHttpRequest();
+  hi_req.addEventListener("load", function (e) {
+    console.log("hi");
+  });
+  hi_req.open("POST", "{{host}}/wapi/hi");
+  hi_req.send();
+}
 })();
