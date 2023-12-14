@@ -67,6 +67,9 @@ if (!ctx_post_seq_nr) {
   hi_req.onreadystatechange = function () {
     if (hi_req.readyState == 4) {
       console.log("hi " + hi_req.status);
+      (function (rep) {
+        console.log("hi: seq_nr=" + rep.seq_nr);
+      })(hi_req.response);
     }
   };
   hi_req.send();
