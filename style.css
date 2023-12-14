@@ -14,16 +14,19 @@ h1 a { color: #000; text-decoration: none; }
 #askwrap { position: fixed; bottom: 0; z-index: 2; padding: 9px; border-top: 1px solid #777; background-color: #fff; }
 #ask textarea { display: block; width: 500px; }
 #ask button { display: block; }
-.ex_ { background-color: #ff8; }
+.ex_ { background-color: #fffeac; }
 .ex_label { color: #333; }
 .ex_nr {}
+.ex_value {}
 #ex_template { display: none; }
 .in_ {}
 .in_label { color: #00789a; font-family: monospace; }
 .in_nr {}
+.in_value {}
 #in_template { display: none; }
 .out { background-color: #ededed; }
 .outlabel { color: #dc5600; font-family: monospace; }
 .outnr {}
+.outvalue {}
 #outtemplate { display: none; }
 .katex { font-size: 1em; }

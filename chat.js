@@ -88,7 +88,8 @@ renderMathInElement(
   //console.log(tmp.id);
   var tmp2 = tmp.cloneNode(true);
   tmp2.removeAttribute("id");
-  tmp2.querySelector(".nr").textContent = "2";
+  tmp2.querySelector(".out_nr").textContent = "2";
+  tmp2.querySelector(".out_value").textContent = "Hello world!";
   var chat = document.querySelector("#chat");
   chat.appendChild(tmp2);
 })();
