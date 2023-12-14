@@ -60,10 +60,15 @@ var chat = document.querySelector("#chat");
 chat.appendChild(tmp2);
 if (!ctx_post_seq_nr) {
   var hi_req = new XMLHttpRequest();
-  hi_req.addEventListener("load", function (e) {
+  /*hi_req.addEventListener("load", function (e) {
     console.log("hi");
-  });
-  hi_req.open("POST", "{{host}}/wapi/hi");
+  });*/
+  hi_req.open("POST", "{{host}}/wapi/hi", true);
+  hi_req.onreadystatechange = function () {
+    if (hi_req.readystate == 4) {
+      console.log("hi " + hi_req.status);
+    }
+  };
   hi_req.send();
 }
 })();
