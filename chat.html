@@ -15,15 +15,15 @@
 <div id="bar"></div>-->
 <div id="header">
 <div class="fl">
-<h1><a href="#">OlympiadChat</a></h1>
+<h1><a href="{{host}}">OlympiadChat</a></h1>
 </div>
 <div class="fl">
 <span class="rhs rhs_smol sans-serif">[build: &alpha;-{{build}}]</span>
 </div>
 <div class="fr">
-<span class="rhs sans-serif"><a href="#">+new</a></span>
-<span class="rhs sans-serif"><a href="#" class="disabled">log</a></span>
-<span class="rhs sans-serif"><a href="#">examples</a></span>
+<span class="rhs sans-serif"><a href="{{host}}#">+new</a></span>
+<span class="rhs sans-serif"><a href="{{host}}#" class="disabled">log</a></span>
+<span class="rhs sans-serif"><a href="{{host}}#">examples</a></span>
 </div>
 <div class="cb-ns"></div>
 </div>
@@ -53,22 +53,6 @@ Prove that $I_1I_2$ and $O_1O_2$ are parallel.<br></div>
 </form>
 </div>
 </div><!--#container-->
-</body>
 <script src="{{host}}/chat.js"></script>
-<!--<script>
-var ctx = {};
-var body = document.querySelector("body");
-var foo = document.querySelector("#foo");
-var bar = document.querySelector("#bar");
-console.log(body);
-console.log(foo);
-console.log(bar);
-var p = document.createElement("p");
-console.log(p);
-var ret = foo.appendChild(p);
-var a = document.createElement("a");
-var ret2 = foo.replaceChild(a, p);
-var p2 = document.createElement("p");
-foo.appendChild(p2);
-</script>-->
+</body>
 </html>
