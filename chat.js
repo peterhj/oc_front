@@ -55,7 +55,7 @@ var tmp = document.querySelector("#outtemplate");
 //console.log(tmp.id);
 var tmp2 = tmp.cloneNode(true);
 tmp2.removeAttribute("id");
-tmp2.querySelector(".nr").textContent = "3";
+tmp2.querySelector(".nr").textContent = "2";
 var chat = document.querySelector("#chat");
 chat.appendChild(tmp2);
 if (!ctx_post_seq_nr) {
