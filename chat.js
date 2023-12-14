@@ -1,19 +1,43 @@
 (function () {
+var ctx_conv_id = null;
+var ctx_post_inc = 0;
+var ctx_post_seq_nr = 0;
+var ctx_reply_seq_nr = 0;
+//var ctx_reply_chunk_nr = null;
 var on_keydown = function (e) {
   if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
     e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
   }
-  /*document.querySelector("#ask")
-    .addEventListener("keydown", on_keydown);*/
 };
 document.querySelector("#ask")
   .addEventListener("keydown", on_keydown);
+var poll_req = null;
 var on_submit = function (e) {
   e.preventDefault();
   console.log("Ask and ye shall receive.");
-  /*document.querySelector("#ask")
-    .addEventListener("submit", on_submit);*/
+  /*
+  if (!ctx_seq_nr) {
+    var hi_req = new XMLHttpRequest();
+    hi_req.addEventListener("load", function (e) {
+    });
+    hi_req.open("POST", "{{host}}/api/hi");
+    hi_req.send();
+  }
+  var post_req = new XMLHttpRequest();
+  post_req.addEventListener("load", function (e) {
+  });
+  post_req.open("POST", "{{host}}/api/post");
+  post_req.send();
+  // TODO TODO: long polling for reply.
+  poll_req = new XMLHttpRequest();
+  while (true) {
+    poll_req.readystatechange = function () {
+    };
+    poll_req.open("POST", "{{host}}/api/poll");
+    poll_req.send();
+  }
+  */
 };
 document.querySelector("#ask")
   .addEventListener("submit", on_submit);
@@ -26,13 +50,6 @@ renderMathInElement(
        {left: "\\[", right: "\\]", display: true}]
     }
 );
-/*
-var hi_req = new XMLHttpRequest();
-hi_req.addEventListener("load", function (e) {
-});
-hi_req.open("POST", "{{host}}/api/hi");
-hi_req.send();
-*/
 var tmp = document.querySelector("#outtemplate");
 //console.log(tmp.id);
 var tmp2 = tmp.cloneNode(true);
