@@ -6,7 +6,8 @@ h1 a { text-decoration: none; }
 .rhs_smol { font-size: 0.75rem; line-height: 3; }
 .rhs a:hover, .rhs a:focus { color: #666; }
 .rhs a.disabled { pointer-events: none; color: #999; }
-#dntoggle { text-decoration: none; }
+#dntoggle { text-decoration: none; color: #666; }
+#dntoggle:hover, #dntoggle:focus { color: #333; }
 #container { width: 518px; margin-left: auto; margin-right: auto; background-color: #f9f9f9; }
 #header { position: fixed; top: 0; z-index: 1; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 3px solid #bcf682; background-color: #fff; }
 #chatwraptop { height: 39px; }
@@ -23,12 +24,12 @@ h1 a { text-decoration: none; }
 .ex_ a { color: #000; text-decoration-style: dotted; }
 .ex_ a:hover, .ex_value a:focus { color: #666; text-decoration: none; }
 #ex_template { display: none; }
-.in_ { .margin-top: 9px; }
+.in_ { margin-top: 9px; }
 .in_label { color: #00789a; font-family: monospace; }
 .in_nr {}
 .in_value {}
 #in_template { display: none; }
-.out { .margin-top: 9px; background-color: #ededed; }
+.out { margin-top: 9px; background-color: #ededed; }
 .outlabel { color: #dc5600; font-family: monospace; }
 .outnr {}
 .outvalue {}
@@ -39,12 +40,14 @@ body.nox { background-color: #070707; color: #ededed; }
 .nox a { color: #ededed; }
 .nox .rhs a:hover, .nox .rhs a:focus { color: #aaa; }
 .nox .rhs a.disabled { color: #777; }
+.nox #dntoggle { text-decoration: none; color: #aaa; }
+.nox #dntoggle:hover, .nox #dntoggle:focus { color: #ededed; }
 .nox #container { background-color: #181818; }
 .nox #header { background-color: #070707; }
 .nox #chat { background-color: #181818; }
 .nox #askwrap { background-color: #070707; }
-.nox .ex_ { background-color: #324; }
+.nox .ex_ { background-color: #351; }
 .nox .ex_label { color: #ededed; }
 .nox .ex_ a { color: #ededed; text-decoration-style: dotted; }
 .nox .ex_ a:hover, .ex_value a:focus { color: #aaa; text-decoration: none; }
-.nox .out { background-color: #444; }
+.nox .out { background-color: #404040; }
