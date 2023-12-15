@@ -35,10 +35,16 @@ h1 a { text-decoration: none; }
 #outtemplate { display: none; }
 .katex { font-size: 1em; }
 
-body.nox { background-color: #111; color: #ededed; }
+body.nox { background-color: #070707; color: #ededed; }
 .nox a { color: #ededed; }
 .nox .rhs a:hover, .nox .rhs a:focus { color: #aaa; }
 .nox .rhs a.disabled { color: #777; }
+.nox #container { background-color: #181818; }
+.nox #header { background-color: #070707; }
+.nox #chat { background-color: #181818; }
+.nox #askwrap { background-color: #070707; }
+.nox .ex_ { background-color: #432; }
 .nox .ex_label { color: #ededed; }
 .nox .ex_value a { color: #ededed; text-decoration-style: dotted; }
 .nox .ex_value a:hover, .ex_value a:focus { color: #aaa; text-decoration: none; }
+.nox .out { background-color: #444; }

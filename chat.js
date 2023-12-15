@@ -91,9 +91,11 @@ var on_dntoggle = function (e) {
   if (ctx_nox) {
     body.classList.remove("nox");
     dntoggle.textContent = "[d]";
+    ctx_nox = false;
   } else {
     body.classList.add("nox");
     dntoggle.textContent = "[n]";
+    ctx_nox = true;
   }
 };
 document.querySelector("#dntoggle")
