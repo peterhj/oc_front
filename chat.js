@@ -6,6 +6,18 @@ var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
 var ctx_poll_req = null;
 var ctx_nox = false;
+(function () {
+  var cookies = document.cookie.split("; ");
+  // FIXME
+  if (cookies[0] == "nox=1") {
+    var body = document.querySelector("body");
+    var dntoggle = document.querySelector("#dntoggle");
+    body.classList.add("nox");
+    dntoggle.textContent = "[n]";
+    ctx_nox = true;
+    document.cookie = "nox=1";
+  }
+})();
 var on_keydown = function (e) {
   if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
@@ -92,10 +104,12 @@ var on_dntoggle = function (e) {
     body.classList.remove("nox");
     dntoggle.textContent = "[d]";
     ctx_nox = false;
+    document.cookie = "nox=0";
   } else {
     body.classList.add("nox");
     dntoggle.textContent = "[n]";
     ctx_nox = true;
+    document.cookie = "nox=1";
   }
   if (document.activeElement == dntoggle) {
     dntoggle.blur();
