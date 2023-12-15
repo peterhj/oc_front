@@ -97,6 +97,9 @@ var on_dntoggle = function (e) {
     dntoggle.textContent = "[n]";
     ctx_nox = true;
   }
+  if (document.activeElement == dntoggle) {
+    dntoggle.blur();
+  }
 };
 document.querySelector("#dntoggle")
   .addEventListener("click", on_dntoggle);
