@@ -5,6 +5,7 @@ var ctx_post_seq_nr = 0;
 var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
 var ctx_poll_req = null;
+var ctx_nox = false;
 var on_keydown = function (e) {
   if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
@@ -83,6 +84,20 @@ renderMathInElement(
        {left: "\\[", right: "\\]", display: true}]
     }
 );
+var on_dntoggle = function (e) {
+  e.preventDefault();
+  var body = document.querySelector("body");
+  var dntoggle = document.querySelector("#dntoggle");
+  if (ctx_nox) {
+    body.classList.remove("nox");
+    dntoggle.textContent = "[d]";
+  } else {
+    body.classList.add("nox");
+    dntoggle.textContent = "[n]";
+  }
+};
+document.querySelector("#dntoggle")
+  .addEventListener("click", on_dntoggle);
 (function () {
   var tmp = document.querySelector("#outtemplate");
   //console.log(tmp.id);
