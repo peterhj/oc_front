@@ -70,11 +70,17 @@ var on_submit = function (e) {
   if (!ctx_post_seq_nr) {
     fresh_hi();
   }
-  var params = new URLSearchParams(new FormData(document.querySelector("#ask")));
+  //var params = new URLSearchParams(new FormData(document.querySelector("#ask")));
+  var params = {};
+  var form = new FormData(document.querySelector("#ask"));
+  form.forEach(function (val, key) {
+    params[key] = val;
+  });
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
-  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  req.setRequestHeader("Content-Type", "application/json");
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
@@ -82,7 +88,7 @@ var on_submit = function (e) {
       // TODO TODO
     }
   };
-  req.send(params);
+  req.send(JSON.stringify(params));
   /*
   var post_req = new XMLHttpRequest();
   post_req.addEventListener("load", function (e) {
