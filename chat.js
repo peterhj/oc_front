@@ -70,9 +70,11 @@ var on_submit = function (e) {
   if (!ctx_post_seq_nr) {
     fresh_hi();
   }
-  var params = new FormData(document.querySelector("#ask"));
+  var params = new URLSearchParams(document.querySelector("#ask"));
   var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/post", false);
+  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  req.overrideMimeType("application/json");
+  req.open("POST", "{{host}}/wapi/post", true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
