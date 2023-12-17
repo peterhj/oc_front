@@ -72,9 +72,9 @@ var on_submit = function (e) {
   }
   var params = new URLSearchParams(new FormData(document.querySelector("#ask")));
   var req = new XMLHttpRequest();
-  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
+  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
