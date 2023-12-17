@@ -70,7 +70,7 @@ var on_submit = function (e) {
   if (!ctx_post_seq_nr) {
     fresh_hi();
   }
-  var params = new URLSearchParams(document.querySelector("#ask"));
+  var params = new URLSearchParams(new FormData(document.querySelector("#ask")));
   var req = new XMLHttpRequest();
   req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.overrideMimeType("application/json");
