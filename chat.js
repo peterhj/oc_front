@@ -28,20 +28,21 @@ document.querySelector("#ask")
   .addEventListener("keydown", on_keydown);
 var fresh_hi = function () {
   var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/hi", false);
+  req.open("POST", "{{host}}/wapi/hi", true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       console.log("hi " + req.status);
       var rep = JSON.parse(req.response);
       console.log("hi: seq_nr=" + rep.seq_nr);
       // FIXME: initialize ctx.
+      ctx_post_seq_nr = rep.seq_nr;
     }
   };
   req.send();
 };
 /*var fresh_poll = function () {
   var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/poll", false);
+  req.open("POST", "{{host}}/wapi/poll", true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
@@ -53,7 +54,7 @@ var fresh_hi = function () {
 };*/
 /*var fresh_post = function () {
   var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/post", false);
+  req.open("POST", "{{host}}/wapi/post", true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
@@ -69,6 +70,17 @@ var on_submit = function (e) {
   if (!ctx_post_seq_nr) {
     fresh_hi();
   }
+  var params = new FormData(document.querySelector("#ask"));
+  var req = new XMLHttpRequest();
+  req.open("POST", "{{host}}/wapi/post", false);
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 201) {
+      var rep = JSON.parse(req.response);
+      console.log("post: res=" + rep.res);
+      // TODO TODO
+    }
+  };
+  req.send(params);
   /*
   var post_req = new XMLHttpRequest();
   post_req.addEventListener("load", function (e) {
@@ -87,15 +99,6 @@ var on_submit = function (e) {
 };
 document.querySelector("#ask")
   .addEventListener("submit", on_submit);
-renderMathInElement(
-    document.querySelector("#chat"),
-    { delimiters:
-      [{left: "$$", right: "$$", display: true},
-       {left: "$", right: "$", display: false},
-       {left: "\\(", right: "\\)", display: false},
-       {left: "\\[", right: "\\]", display: true}]
-    }
-);
 var on_dntoggle = function (e) {
   e.preventDefault();
   var body = document.querySelector("body");
@@ -130,4 +133,13 @@ document.querySelector("#dntoggle")
 if (!ctx_post_seq_nr) {
   fresh_hi();
 }
+renderMathInElement(
+    document.querySelector("#chat"),
+    { delimiters:
+      [{left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false},
+       {left: "\\(", right: "\\)", display: false},
+       {left: "\\[", right: "\\]", display: true}]
+    }
+);
 })();
