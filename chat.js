@@ -84,7 +84,7 @@ var on_submit = function (e) {
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
-      console.log("post: res=" + rep.res);
+      console.log("post: err=" + rep.err);
       // TODO TODO
     }
   };
