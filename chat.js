@@ -6,16 +6,45 @@ var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
 var ctx_poll_req = null;
 var ctx_nox = false;
+var day = function () {
+  var body = document.querySelector("body");
+  var dntoggle = document.querySelector("#dntoggle");
+  body.classList.remove("nox");
+  dntoggle.textContent = "[d]";
+  ctx_nox = false;
+  document.cookie = "nox=0";
+};
+var nox = function () {
+  var body = document.querySelector("body");
+  var dntoggle = document.querySelector("#dntoggle");
+  body.classList.add("nox");
+  dntoggle.textContent = "[n]";
+  ctx_nox = true;
+  document.cookie = "nox=1";
+};
+var post_in_ = function (nr, content) {
+  var tmp = document.querySelector("#in_template");
+  var tmp2 = tmp.cloneNode(true);
+  tmp2.removeAttribute("id");
+  tmp2.querySelector(".in_nr").textContent = "" + nr;
+  tmp2.querySelector(".in_value").textContent = content;
+  var chat = document.querySelector("#chat");
+  chat.appendChild(tmp2);
+};
+var post_out = function (nr, content) {
+  var tmp = document.querySelector("#outtemplate");
+  var tmp2 = tmp.cloneNode(true);
+  tmp2.removeAttribute("id");
+  tmp2.querySelector(".outnr").textContent = "" + nr;
+  tmp2.querySelector(".outvalue").textContent = content;
+  var chat = document.querySelector("#chat");
+  chat.appendChild(tmp2);
+};
 (function () {
   var cookies = document.cookie.split("; ");
   // FIXME
   if (cookies[0] == "nox=1") {
-    var body = document.querySelector("body");
-    var dntoggle = document.querySelector("#dntoggle");
-    body.classList.add("nox");
-    dntoggle.textContent = "[n]";
-    ctx_nox = true;
-    document.cookie = "nox=1";
+    nox();
   }
 })();
 var on_keydown = function (e) {
@@ -76,6 +105,7 @@ var on_submit = function (e) {
   form.forEach(function (val, key) {
     params[key] = val;
   });
+  post_in_(ctx_post_seq_nr, params.q || "");
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
@@ -86,6 +116,12 @@ var on_submit = function (e) {
       var rep = JSON.parse(req.response);
       console.log("post: err=" + rep.err);
       // TODO TODO
+      if (rep.err) {
+        post_out(ctx_post_seq_nr, "[debug: Error: NotImplemented]");
+      } else {
+        post_out(ctx_post_seq_nr, "[debug: OK]");
+      }
+      ctx_post_seq_nr += 1;
     }
   };
   req.send(JSON.stringify(params));
@@ -109,19 +145,12 @@ document.querySelector("#ask")
   .addEventListener("submit", on_submit);
 var on_dntoggle = function (e) {
   e.preventDefault();
-  var body = document.querySelector("body");
-  var dntoggle = document.querySelector("#dntoggle");
   if (ctx_nox) {
-    body.classList.remove("nox");
-    dntoggle.textContent = "[d]";
-    ctx_nox = false;
-    document.cookie = "nox=0";
+    day();
   } else {
-    body.classList.add("nox");
-    dntoggle.textContent = "[n]";
-    ctx_nox = true;
-    document.cookie = "nox=1";
+    nox();
   }
+  var dntoggle = document.querySelector("#dntoggle");
   if (document.activeElement == dntoggle) {
     dntoggle.blur();
   }
