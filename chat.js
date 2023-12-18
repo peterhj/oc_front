@@ -81,18 +81,6 @@ var fresh_hi = function () {
   // FIXME: params?
   req.send();
 };*/
-/*var fresh_post = function () {
-  var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/post", true);
-  req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 201) {
-      var rep = JSON.parse(req.response);
-      // TODO TODO
-    }
-  };
-  // FIXME: params?
-  req.send();
-};*/
 var on_submit = function (e) {
   e.preventDefault();
   console.log("Ask and ye shall receive.");
@@ -105,11 +93,13 @@ var on_submit = function (e) {
   form.forEach(function (val, key) {
     params[key] = val;
   });
-  post_in_(ctx_post_seq_nr, params.q || "");
+  // FIXME: ctx step.
+  params["seq_nr"] = ctx_post_seq_nr;
+  ctx_post_seq_nr += 1;
+  post_in_(params.seq_nr, params.q || "");
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
-  //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   req.setRequestHeader("Content-Type", "application/json");
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
@@ -117,20 +107,14 @@ var on_submit = function (e) {
       console.log("post: err=" + rep.err);
       // TODO TODO
       if (rep.err) {
-        post_out(ctx_post_seq_nr, "[debug: Error: NotImplemented]");
+        post_out(params.seq_nr, "[debug: Error: NotImplemented]");
       } else {
-        post_out(ctx_post_seq_nr, "[debug: OK]");
+        post_out(params.seq_nr, "[debug: OK]");
       }
-      ctx_post_seq_nr += 1;
     }
   };
   req.send(JSON.stringify(params));
   /*
-  var post_req = new XMLHttpRequest();
-  post_req.addEventListener("load", function (e) {
-  });
-  post_req.open("POST", "{{host}}/wapi/post");
-  post_req.send();
   // TODO TODO: long polling for reply.
   ctx_poll_req = new XMLHttpRequest();
   while (true) {
