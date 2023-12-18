@@ -141,16 +141,6 @@ var on_dntoggle = function (e) {
 };
 document.querySelector("#dntoggle")
   .addEventListener("click", on_dntoggle);
-(function () {
-  var tmp = document.querySelector("#outtemplate");
-  //console.log(tmp.id);
-  var tmp2 = tmp.cloneNode(true);
-  tmp2.removeAttribute("id");
-  tmp2.querySelector(".outnr").textContent = "2";
-  tmp2.querySelector(".outvalue").textContent = "Hello world!";
-  var chat = document.querySelector("#chat");
-  chat.appendChild(tmp2);
-})();
 if (!ctx_post_seq_nr) {
   fresh_hi();
 }
