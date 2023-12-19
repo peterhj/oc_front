@@ -60,8 +60,8 @@ var post_out = function (nr, prefix, contents) {
   tmp2.querySelector(".outprefix").textContent = prefix;
   //tmp2.querySelector(".outvalue").textContent = content;
   for (var content in contents) {
-    tmp2.querySelector(".outvalue").appendChild(content);
-    tmp2.querySelector(".outvalue").appendChild("<br>");
+    tmp2.querySelector(".outvalue").appendChild(document.createTextNode(content));
+    tmp2.querySelector(".outvalue").appendChild(document.createElement("br"));
   }
   //tmp2.querySelector(".outsuffix").textContent = suffix;
   render_latex(tmp2);
