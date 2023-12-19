@@ -1,11 +1,12 @@
 (function () {
+var ctx_nox = false;
 var ctx_conv_id = null;
 var ctx_post_inc = 0;
 var ctx_post_seq_nr = 0;
 var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
 var ctx_poll_req = null;
-var ctx_nox = false;
+var ctx_post_texts = [null];
 var day = function () {
   var body = document.querySelector("body");
   var dntoggle = document.querySelector("#dntoggle");
@@ -42,6 +43,12 @@ var post_in_ = function (nr, content) {
   tmp2.querySelector(".in_value").textContent = content;
   render_latex(tmp2);
   chat.appendChild(tmp2);
+  if (nr < ctx_post_texts.length) {
+    ctx_post_texts[nr] = content;
+  } else {
+    // FIXME: resize null or "".
+    ctx_post_texts.push(content);
+  }
 };
 var post_out = function (nr, prefix, content) {
   var chat = document.querySelector("#chat");
@@ -75,9 +82,9 @@ var fresh_hi = function () {
   req.open("POST", "{{host}}/wapi/hi", true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
-      console.log("hi " + req.status);
+      //console.log("hi " + req.status);
       var rep = JSON.parse(req.response);
-      console.log("hi: seq_nr=" + rep.seq_nr);
+      //console.log("hi: seq_nr=" + rep.seq_nr);
       // FIXME: initialize ctx.
       ctx_post_seq_nr = rep.seq_nr;
     }
@@ -124,16 +131,18 @@ var on_submit = function (e) {
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
-      console.log("post: err=" + rep.err);
+      //console.log("post: err=" + rep.err);
       // TODO TODO
       if (rep.err) {
         post_out(params.seq_nr, "[debug: Exception: SyntaxError]", "");
-        console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
+        //console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
         var last = document.querySelectorAll(".in_value")[params.seq_nr];
-        var prefix = last.textContent.slice(0, rep.mrk_s);
-        var pat = last.textContent.slice(rep.mrk_s, rep.mrk_e);
-        var suffix = last.textContent.slice(rep.mrk_e, last.textContent.length);
+        var text = ctx_post_texts[params.seq_nr];
+        var prefix = text.slice(0, rep.mrk_s);
+        var pat = text.slice(rep.mrk_s, rep.mrk_e);
+        var suffix = text.slice(rep.mrk_e);
         last.innerHTML = prefix.concat("<span class=\"in_mrk\">", pat, "</span>", suffix);
+        render_latex(last);
       } else {
         post_out(params.seq_nr, "[debug: OK]", "");
       }
