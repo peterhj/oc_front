@@ -149,10 +149,14 @@ var on_submit = function (e) {
         post_out(params.seq_nr, "[Exception: DecodeError: please see highlighted text (above)]", []);
         //console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
         var last = document.querySelectorAll(".in_value")[params.seq_nr];
-        var text = ctx_post_texts[params.seq_nr];
+        var text = ctx_post_texts[params.seq_nr].concat(" ");
         var prefix = text.slice(0, rep.mrk_s);
-        var pat = text.slice(rep.mrk_s, rep.mrk_e);
-        var suffix = text.slice(rep.mrk_e);
+        var mrk_e = rep.mrk_e;
+        if (rep.mrk_s == e) {
+          mrk_e += 1;
+        }
+        var pat = text.slice(rep.mrk_s, mrk_e);
+        var suffix = text.slice(mrk_e);
         last.innerHTML = prefix.concat("<span class=\"in_mrk\">", pat, "</span>", suffix);
         render_latex(last);
       } else {
