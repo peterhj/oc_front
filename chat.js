@@ -152,7 +152,7 @@ var on_submit = function (e) {
         var text = ctx_post_texts[params.seq_nr].concat(" ");
         var prefix = text.slice(0, rep.mrk_s);
         var mrk_e = rep.mrk_e;
-        if (rep.mrk_s == e) {
+        if (rep.mrk_s == mrk_e) {
           mrk_e += 1;
         }
         var pat = text.slice(rep.mrk_s, mrk_e);
