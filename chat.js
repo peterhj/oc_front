@@ -61,7 +61,9 @@ var post_out = function (nr, prefix, contents) {
   //tmp2.querySelector(".outvalue").textContent = content;
   for (var idx = 0; idx < contents.length; idx++) {
     var content = contents[idx];
-    tmp2.querySelector(".outvalue").appendChild(document.createElement("br"));
+    if (idx > 0) {
+      tmp2.querySelector(".outvalue").appendChild(document.createElement("br"));
+    }
     tmp2.querySelector(".outvalue").appendChild(document.createTextNode(content));
   }
   //tmp2.querySelector(".outsuffix").textContent = suffix;
