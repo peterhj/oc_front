@@ -50,6 +50,7 @@ body.nox { background-color: #070707; color: #ededed; }
 .nox #container { background-color: #181818; }
 .nox #header { background-color: #070707; }
 .nox #chat { background-color: #181818; }
+.nox #chatwrapbot { background-color: #070707; }
 .nox #askwrap { background-color: #070707; }
 .nox .ex_ { background-color: #351; }
 .nox .ex_label { color: #ededed; }
