@@ -130,9 +130,10 @@ var on_submit = function (e) {
         post_out(params.seq_nr, "[debug: Exception: SyntaxError]", "");
         console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
         var last = document.querySelectorAll(".in_value")[params.seq_nr - 1];
-        //var pat = last.innerHTML.slice(rep.mrk_s, rep.mrk_e);
+        var prefix = last.textContent.slice(0, rep.mrk_s);
         var pat = last.textContent.slice(rep.mrk_s, rep.mrk_e);
-        last.innerHTML.substring(rep.mrk_s, rep.mrk_e) = "<span class=\"in_mrk\">" + pat + "</span>";
+        var suffix = last.textContent.slice(rep.mrk_e, last.textContent.length);
+        last.innerHTML = "".join([prefix, "<span class=\"in_mrk\">", pat, "</span>", suffix]);
       } else {
         post_out(params.seq_nr, "[debug: OK]", "");
       }
