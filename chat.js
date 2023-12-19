@@ -43,6 +43,7 @@ var post_in_ = function (nr, content) {
   tmp2.querySelector(".in_value").textContent = content;
   render_latex(tmp2);
   chat.appendChild(tmp2);
+  window.scrollTo(0, document.body.scrollHeight);
   if (nr < ctx_post_texts.length) {
     ctx_post_texts[nr] = content;
   } else {
@@ -61,6 +62,7 @@ var post_out = function (nr, prefix, content) {
   //tmp2.querySelector(".outsuffix").textContent = suffix;
   render_latex(tmp2);
   chat.appendChild(tmp2);
+  window.scrollTo(0, document.body.scrollHeight);
 };
 (function () {
   var cookies = document.cookie.split("; ");
@@ -77,7 +79,7 @@ var on_keydown = function (e) {
 };
 document.querySelector("#ask")
   .addEventListener("keydown", on_keydown);
-var fresh_hi = function () {
+var req_hi = function () {
   var req = new XMLHttpRequest();
   req.open("POST", "{{host}}/wapi/hi", true);
   req.onreadystatechange = function () {
@@ -91,7 +93,7 @@ var fresh_hi = function () {
   };
   req.send();
 };
-/*var fresh_poll = function () {
+/*var req_poll = function () {
   var req = new XMLHttpRequest();
   req.open("POST", "{{host}}/wapi/poll", true);
   req.onreadystatechange = function () {
@@ -103,11 +105,16 @@ var fresh_hi = function () {
   // FIXME: params?
   req.send();
 };*/
+var fresh = function () {
+  req_hi();
+  ctx_post_texts = [null];
+  // FIXME: clear #chat.
+};
 var on_submit = function (e) {
   e.preventDefault();
   console.log("Ask and ye shall receive.");
   if (!ctx_post_seq_nr) {
-    fresh_hi();
+    req_hi();
   }
   var ask = document.querySelector("#ask");
   // FIXME: test empy.
@@ -177,7 +184,7 @@ var on_dntoggle = function (e) {
 document.querySelector("#dntoggle")
   .addEventListener("click", on_dntoggle);
 if (!ctx_post_seq_nr) {
-  fresh_hi();
+  req_hi();
 }
 render_latex(document.querySelector("#chat"));
 })();
