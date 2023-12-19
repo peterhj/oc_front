@@ -133,7 +133,7 @@ var on_submit = function (e) {
         var prefix = last.textContent.slice(0, rep.mrk_s);
         var pat = last.textContent.slice(rep.mrk_s, rep.mrk_e);
         var suffix = last.textContent.slice(rep.mrk_e, last.textContent.length);
-        last.innerHTML = prefix.concat(["<span class=\"in_mrk\">", pat, "</span>", suffix]);
+        last.innerHTML = prefix.concat("<span class=\"in_mrk\">", pat, "</span>", suffix);
       } else {
         post_out(params.seq_nr, "[debug: OK]", "");
       }
