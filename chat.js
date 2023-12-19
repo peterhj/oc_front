@@ -129,7 +129,7 @@ var on_submit = function (e) {
       if (rep.err) {
         post_out(params.seq_nr, "[debug: Exception: SyntaxError]", "");
         console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
-        var last = document.querySelectorAll(".in_value")[params.seq_nr - 1];
+        var last = document.querySelectorAll(".in_value")[params.seq_nr];
         var prefix = last.textContent.slice(0, rep.mrk_s);
         var pat = last.textContent.slice(rep.mrk_s, rep.mrk_e);
         var suffix = last.textContent.slice(rep.mrk_e, last.textContent.length);
