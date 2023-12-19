@@ -2,6 +2,7 @@ body { background-color: #ededed; }
 h1 { font-size: 1.25rem; font-weight: normal; margin-left: 0; margin-right: 0; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1; }
 a { color: #000; }
 h1 a { text-decoration: none; }
+.katex { font-size: 1em; }
 .rhs { font-size: 0.9rem; margin-left: 0.625em; margin-right: 0; margin-top: 0.5625rem; margin-bottom: 0.5625rem; line-height: 2.5; }
 .rhs_smol { font-size: 0.75rem; line-height: 3; }
 .rhs a:hover, .rhs a:focus { color: #666; }
@@ -12,8 +13,9 @@ h1 a { text-decoration: none; }
 #header { position: fixed; top: 0; z-index: 1; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 3px solid #bcf682; background-color: #fff; }
 #chatwraptop { height: 39px; }
 #chatwrap { width: 518px; /*padding-left: 9px; padding-right: 9px;*/ }
-#chat { width: 518px; height: 1000px; padding: 9px; background-color: #f9f9f9; }
-#askwrap { position: fixed; bottom: 0; z-index: 2; padding: 9px; border-top: 1px solid #777; background-color: #fff; }
+#chat { width: 518px; padding: 9px; background-color: #f9f9f9; }
+#askwrap { position: fixed; bottom: 0; z-index: 2; height: 108px; padding: 9px; border-top: 1px solid #777; background-color: #fff; }
+#askinst { font-size: 0.75rem; font-style: italic; }
 #ask textarea { display: block; width: 500px; }
 #ask button { display: block; }
 .ex_ { padding-top: 9px; background-color: #fffeac; }
@@ -22,7 +24,9 @@ h1 a { text-decoration: none; }
 .ex_nr {}
 .ex_value {}
 .ex_ a { color: #000; text-decoration-style: dotted; }
-.ex_ a:hover, .ex_value a:focus { color: #666; text-decoration: none; }
+.ex_ a:hover, .ex_ a:focus { color: #666; text-decoration: none; }
+.ex_ a .katex { text-decoration-style: dotted; }
+.ex_ a:hover .katex, .ex_ a:focus .katex { text-decoration: none; }
 #ex_template { display: none; }
 .in_ { margin-top: 9px; }
 .in_label { color: #00789a; font-family: monospace; }
@@ -32,9 +36,10 @@ h1 a { text-decoration: none; }
 .out { margin-top: 9px; background-color: #ededed; }
 .outlabel { color: #dc5600; font-family: monospace; }
 .outnr {}
+.outprefix { font-style: italic; }
 .outvalue {}
+.outsuffix { font-style: italic; }
 #outtemplate { display: none; }
-.katex { font-size: 1em; }
 
 body.nox { background-color: #070707; color: #ededed; }
 .nox a { color: #ededed; }
@@ -49,5 +54,5 @@ body.nox { background-color: #070707; color: #ededed; }
 .nox .ex_ { background-color: #351; }
 .nox .ex_label { color: #ededed; }
 .nox .ex_ a { color: #ededed; text-decoration-style: dotted; }
-.nox .ex_ a:hover, .ex_value a:focus { color: #aaa; text-decoration: none; }
+.nox .ex_ a:hover, .ex_ a:focus { color: #aaa; text-decoration: none; }
 .nox .out { background-color: #404040; }

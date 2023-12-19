@@ -22,6 +22,17 @@ var nox = function () {
   ctx_nox = true;
   document.cookie = "nox=1";
 };
+var render_latex = function (elem) {
+  renderMathInElement(
+      elem,
+      { delimiters:
+        [{left: "$$", right: "$$", display: true},
+         {left: "$", right: "$", display: false},
+         {left: "\\(", right: "\\)", display: false},
+         {left: "\\[", right: "\\]", display: true}]
+      }
+  );
+};
 var post_in_ = function (nr, content) {
   var chat = document.querySelector("#chat");
   var tmp = document.querySelector("#in_template");
@@ -41,17 +52,6 @@ var post_out = function (nr, content) {
   tmp2.querySelector(".outvalue").textContent = content;
   render_latex(tmp2);
   chat.appendChild(tmp2);
-};
-var render_latex = function (elem) {
-  renderMathInElement(
-      elem,
-      { delimiters:
-        [{left: "$$", right: "$$", display: true},
-         {left: "$", right: "$", display: false},
-         {left: "\\(", right: "\\)", display: false},
-         {left: "\\[", right: "\\]", display: true}]
-      }
-  );
 };
 (function () {
   var cookies = document.cookie.split("; ");
@@ -100,9 +100,13 @@ var on_submit = function (e) {
   if (!ctx_post_seq_nr) {
     fresh_hi();
   }
-  //var params = new URLSearchParams(new FormData(document.querySelector("#ask")));
+  var ask = document.querySelector("#ask");
+  // FIXME: test empy.
+  if (ask.querySelector("textarea").value.length <= 0) {
+    return;
+  }
   var params = {};
-  var form = new FormData(document.querySelector("#ask"));
+  var form = new FormData(ask);
   form.forEach(function (val, key) {
     params[key] = val;
   });
@@ -110,6 +114,7 @@ var on_submit = function (e) {
   params["seq_nr"] = ctx_post_seq_nr;
   ctx_post_seq_nr += 1;
   post_in_(params.seq_nr, params.q || "");
+  ask.querySelector("textarea").value = "";
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
@@ -120,7 +125,7 @@ var on_submit = function (e) {
       console.log("post: err=" + rep.err);
       // TODO TODO
       if (rep.err) {
-        post_out(params.seq_nr, "[debug: Error: NotImplemented]");
+        post_out(params.seq_nr, "[debug: Exception: SyntaxError]");
       } else {
         post_out(params.seq_nr, "[debug: OK]");
       }
