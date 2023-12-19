@@ -24,10 +24,8 @@ h1 a { text-decoration: none; }
 .ex_label { color: #333; }
 .ex_nr {}
 .ex_value {}
-.ex_ a { color: #000; text-decoration-style: dotted; }
-.ex_ a:hover, .ex_ a:focus { color: #666; text-decoration: none; }
-.ex_ a .katex { text-decoration-style: dotted; }
-.ex_ a:hover .katex, .ex_ a:focus .katex { text-decoration: none; }
+.ex_ a { color: #000; }
+.ex_ a:hover, .ex_ a:focus { color: #666; }
 #ex_template { display: none; }
 .in_ { margin-top: 9px; }
 .in_label { color: #00789a; font-family: monospace; }
@@ -55,6 +53,6 @@ body.nox { background-color: #070707; color: #ededed; }
 .nox #askwrap { background-color: #070707; }
 .nox .ex_ { background-color: #351; }
 .nox .ex_label { color: #ededed; }
-.nox .ex_ a { color: #ededed; text-decoration-style: dotted; }
-.nox .ex_ a:hover, .ex_ a:focus { color: #aaa; text-decoration: none; }
+.nox .ex_ a { color: #ededed; }
+.nox .ex_ a:hover, .ex_ a:focus { color: #aaa; }
 .nox .out { background-color: #404040; }
