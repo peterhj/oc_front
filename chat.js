@@ -23,22 +23,35 @@ var nox = function () {
   document.cookie = "nox=1";
 };
 var post_in_ = function (nr, content) {
+  var chat = document.querySelector("#chat");
   var tmp = document.querySelector("#in_template");
   var tmp2 = tmp.cloneNode(true);
   tmp2.removeAttribute("id");
   tmp2.querySelector(".in_nr").textContent = "" + nr;
   tmp2.querySelector(".in_value").textContent = content;
-  var chat = document.querySelector("#chat");
+  render_latex(tmp2);
   chat.appendChild(tmp2);
 };
 var post_out = function (nr, content) {
+  var chat = document.querySelector("#chat");
   var tmp = document.querySelector("#outtemplate");
   var tmp2 = tmp.cloneNode(true);
   tmp2.removeAttribute("id");
   tmp2.querySelector(".outnr").textContent = "" + nr;
   tmp2.querySelector(".outvalue").textContent = content;
-  var chat = document.querySelector("#chat");
+  render_latex(tmp2);
   chat.appendChild(tmp2);
+};
+var render_latex = function (elem) {
+  renderMathInElement(
+      elem,
+      { delimiters:
+        [{left: "$$", right: "$$", display: true},
+         {left: "$", right: "$", display: false},
+         {left: "\\(", right: "\\)", display: false},
+         {left: "\\[", right: "\\]", display: true}]
+      }
+  );
 };
 (function () {
   var cookies = document.cookie.split("; ");
@@ -144,13 +157,5 @@ document.querySelector("#dntoggle")
 if (!ctx_post_seq_nr) {
   fresh_hi();
 }
-renderMathInElement(
-    document.querySelector("#chat"),
-    { delimiters:
-      [{left: "$$", right: "$$", display: true},
-       {left: "$", right: "$", display: false},
-       {left: "\\(", right: "\\)", display: false},
-       {left: "\\[", right: "\\]", display: true}]
-    }
-);
+render_latex(document.querySelector("#chat"));
 })();
