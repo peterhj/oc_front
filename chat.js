@@ -43,13 +43,15 @@ var post_in_ = function (nr, content) {
   render_latex(tmp2);
   chat.appendChild(tmp2);
 };
-var post_out = function (nr, content) {
+var post_out = function (nr, prefix, content) {
   var chat = document.querySelector("#chat");
   var tmp = document.querySelector("#outtemplate");
   var tmp2 = tmp.cloneNode(true);
   tmp2.removeAttribute("id");
   tmp2.querySelector(".outnr").textContent = "" + nr;
+  tmp2.querySelector(".outprefix").textContent = prefix;
   tmp2.querySelector(".outvalue").textContent = content;
+  //tmp2.querySelector(".outsuffix").textContent = suffix;
   render_latex(tmp2);
   chat.appendChild(tmp2);
 };
@@ -125,9 +127,11 @@ var on_submit = function (e) {
       console.log("post: err=" + rep.err);
       // TODO TODO
       if (rep.err) {
-        post_out(params.seq_nr, "[debug: Exception: SyntaxError]");
+        post_out(params.seq_nr, "[debug: Exception: SyntaxError]", "");
+        console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
+        //var last = document.querySelectorAll(".in_value")[params.seq_nr - 1];
       } else {
-        post_out(params.seq_nr, "[debug: OK]");
+        post_out(params.seq_nr, "[debug: OK]", "");
       }
     }
   };
