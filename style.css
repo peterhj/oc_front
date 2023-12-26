@@ -27,6 +27,10 @@ h1 a { text-decoration: none; }
 .ex_ a { color: #000; }
 .ex_ a:hover, .ex_ a:focus { color: #666; }
 #ex_template { display: none; }
+.sys { margin-top: 9px; }
+.syslabel { color: #777; font-family: monospace; }
+.sysvalue {}
+#systemplate { display: none; }
 .in_ { margin-top: 9px; }
 .in_label { color: #00789a; font-family: monospace; }
 .in_nr {}

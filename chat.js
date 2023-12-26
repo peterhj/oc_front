@@ -197,5 +197,6 @@ document.querySelector("#dntoggle")
 if (!ctx_post_seq_nr) {
   req_hi();
 }
+// FIXME: save the example textContent before auto-render.
 render_latex(document.querySelector("#chat"));
 })();
