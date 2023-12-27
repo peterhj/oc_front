@@ -6,6 +6,7 @@ var ctx_post_seq_nr = 0;
 var ctx_reply_seq_nr = 0;
 //var ctx_reply_chunk_nr = null;
 var ctx_poll_req = null;
+var ctx_ex_texts = [];
 var ctx_post_texts = [null];
 var day = function () {
   var body = document.querySelector("body");
@@ -133,27 +134,7 @@ var fresh = function () {
   ctx_post_texts = [null];
   // FIXME: clear #chat.
 };
-var on_submit = function (e) {
-  e.preventDefault();
-  console.log("Ask and ye shall receive.");
-  if (!ctx_post_seq_nr) {
-    req_hi();
-  }
-  var ask = document.querySelector("#ask");
-  // FIXME: test empy.
-  if (ask.querySelector("textarea").value.length <= 0) {
-    return;
-  }
-  var params = {};
-  var form = new FormData(ask);
-  form.forEach(function (val, key) {
-    params[key] = val;
-  });
-  // FIXME: ctx step.
-  params["seq_nr"] = ctx_post_seq_nr;
-  ctx_post_seq_nr += 1;
-  post_in_(params.seq_nr, params.q || "");
-  ask.querySelector("textarea").value = "";
+var req_post = function (params) {
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
   req.open("POST", "{{host}}/wapi/post", true);
@@ -185,6 +166,29 @@ var on_submit = function (e) {
     }
   };
   req.send(JSON.stringify(params));
+};
+var on_submit = function (e) {
+  e.preventDefault();
+  //console.log("Ask and ye shall receive.");
+  if (!ctx_post_seq_nr) {
+    req_hi();
+  }
+  var ask = document.querySelector("#ask");
+  // FIXME: test empy.
+  if (ask.querySelector("textarea").value.length <= 0) {
+    return;
+  }
+  var params = {};
+  var form = new FormData(ask);
+  form.forEach(function (val, key) {
+    params[key] = val;
+  });
+  // FIXME: ctx step.
+  params["seq_nr"] = ctx_post_seq_nr;
+  ctx_post_seq_nr += 1;
+  post_in_(params.seq_nr, params.q || "");
+  ask.querySelector("textarea").value = "";
+  req_post(params);
   /*
   // TODO TODO: long polling for reply.
   ctx_poll_req = new XMLHttpRequest();
@@ -215,6 +219,29 @@ document.querySelector("#dntoggle")
 if (!ctx_post_seq_nr) {
   req_hi();
 }
-// FIXME: save the example textContent before auto-render.
-render_latex(document.querySelector("#chat"));
+var on_example = function (e) {
+  e.preventDefault();
+  if (!ctx_post_seq_nr) {
+    req_hi();
+  }
+  var params = {};
+  params["q"] = ctx_ex_texts[idx];
+  // FIXME: ctx step.
+  params["seq_nr"] = ctx_post_seq_nr;
+  ctx_post_seq_nr += 1;
+  post_in_(params.seq_nr, params.q || "");
+  req_post(params);
+};
+(function () {
+  var examples = document.querySelector("#examples");
+  var ex_vals = examples.querySelectorAll(".ex_value");
+  for (var idx = 0; idx < ex_vals.length; idx++) {
+    ctx_ex_texts.push(ex_vals[idx].textContent);
+  }
+  var a_s = examples.querySelectorAll("a");
+  for (var idx = 0; idx < a_s.length; idx++) {
+    a_s[idx].addEventListener("click", on_example);
+  }
+  render_latex(examples);
+})();
 })();
