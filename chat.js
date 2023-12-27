@@ -27,11 +27,11 @@ var nox = function () {
 var render_latex = function (elem) {
   renderMathInElement(
       elem,
-      { delimiters:
-        [{left: "$$", right: "$$", display: true},
-         {left: "$", right: "$", display: false},
-         {left: "\\(", right: "\\)", display: false},
-         {left: "\\[", right: "\\]", display: true}]
+      { "delimiters":
+        [{"left": "$$", "right": "$$", "display": true},
+         {"left": "$", "right": "$", "display": false},
+         {"left": "\\(", "right": "\\)", "display": false},
+         {"left": "\\[", "right": "\\]", "display": true}]
       }
   );
 };
@@ -117,18 +117,6 @@ var req_hi = function () {
   };
   req.send();
 };
-/*var req_poll = function () {
-  var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/poll", true);
-  req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 201) {
-      var rep = JSON.parse(req.response);
-      // TODO TODO
-    }
-  };
-  // FIXME: params?
-  req.send();
-};*/
 var fresh = function () {
   req_hi();
   ctx_post_texts = [null];
@@ -189,16 +177,6 @@ var on_submit = function (e) {
   post_in_(params.seq_nr, params.q || "");
   ask.querySelector("textarea").value = "";
   req_post(params);
-  /*
-  // TODO TODO: long polling for reply.
-  ctx_poll_req = new XMLHttpRequest();
-  while (true) {
-    ctx_poll_req.readystatechange = function () {
-    };
-    ctx_poll_req.open("POST", "{{host}}/wapi/poll");
-    ctx_poll_req.send();
-  }
-  */
 };
 document.querySelector("#ask")
   .addEventListener("submit", on_submit);
