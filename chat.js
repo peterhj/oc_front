@@ -219,28 +219,32 @@ document.querySelector("#dntoggle")
 if (!ctx_post_seq_nr) {
   req_hi();
 }
-var on_example = function (e) {
-  e.preventDefault();
-  if (!ctx_post_seq_nr) {
-    req_hi();
-  }
-  var params = {};
-  params["q"] = ctx_ex_texts[idx];
-  // FIXME: ctx step.
-  params["seq_nr"] = ctx_post_seq_nr;
-  ctx_post_seq_nr += 1;
-  post_in_(params.seq_nr, params.q || "");
-  req_post(params);
+var on_example = function (idx) {
+  return function (e) {
+    e.preventDefault();
+    if (!ctx_post_seq_nr) {
+      req_hi();
+    }
+    var params = {};
+    params["q"] = ctx_ex_texts[idx];
+    // FIXME: ctx step.
+    params["seq_nr"] = ctx_post_seq_nr;
+    ctx_post_seq_nr += 1;
+    post_in_(params.seq_nr, params.q || "");
+    req_post(params);
+  };
 };
 (function () {
   var examples = document.querySelector("#examples");
   var ex_vals = examples.querySelectorAll(".ex_value");
   for (var idx = 0; idx < ex_vals.length; idx++) {
+    console.log("DEBUG: ex[" + idx + "]=" + ex_vals[idx].textContent);
     ctx_ex_texts.push(ex_vals[idx].textContent);
   }
   var a_s = examples.querySelectorAll("a");
   for (var idx = 0; idx < a_s.length; idx++) {
-    a_s[idx].addEventListener("click", on_example);
+    console.log("DEBUG: a[" + idx + "]");
+    a_s[idx].addEventListener("click", on_example(idx));
   }
   render_latex(examples);
 })();
