@@ -34,6 +34,22 @@ var render_latex = function (elem) {
       }
   );
 };
+var post_sys = function (nr, content) {
+  var chat = document.querySelector("#chat");
+  var tmp = document.querySelector("#systemplate");
+  var tmp2 = tmp.cloneNode(true);
+  tmp2.removeAttribute("id");
+  tmp2.querySelector(".sysvalue").textContent = content;
+  render_latex(tmp2);
+  chat.appendChild(tmp2);
+  window.scrollTo(0, document.body.scrollHeight);
+  if (nr < ctx_post_texts.length) {
+    ctx_post_texts[nr] = content;
+  } else {
+    // FIXME: resize null or "".
+    ctx_post_texts.push(content);
+  }
+};
 var post_in_ = function (nr, content) {
   var chat = document.querySelector("#chat");
   var tmp = document.querySelector("#in_template");
@@ -143,7 +159,9 @@ var on_submit = function (e) {
   req.open("POST", "{{host}}/wapi/post", true);
   req.setRequestHeader("Content-Type", "application/json");
   req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 201) {
+    if (req.readyState == 4 && req.status != 201) {
+      post_sys(params.seq_nr, "[Server unresponsive, please retry your request.]");
+    } else if (req.readyState == 4 && req.status == 201) {
       var rep = JSON.parse(req.response);
       //console.log("post: err=" + rep.err);
       // TODO TODO
