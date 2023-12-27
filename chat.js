@@ -238,8 +238,9 @@ var on_example = function (idx) {
   var examples = document.querySelector("#examples");
   var ex_vals = examples.querySelectorAll(".ex_value");
   for (var idx = 0; idx < ex_vals.length; idx++) {
-    console.log("DEBUG: ex[" + idx + "]=" + ex_vals[idx].textContent);
-    ctx_ex_texts.push(ex_vals[idx].textContent);
+    var s = ex_vals[idx].textContent.trim();
+    console.log("DEBUG: ex[" + idx + "]=" + s);
+    ctx_ex_texts.push(s);
   }
   var a_s = examples.querySelectorAll("a");
   for (var idx = 0; idx < a_s.length; idx++) {
