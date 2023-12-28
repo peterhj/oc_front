@@ -11,18 +11,22 @@ var ctx_post_texts = [null];
 var day = function () {
   var body = document.querySelector("body");
   var dntoggle = document.querySelector("#dntoggle");
-  body.classList.remove("nox");
-  dntoggle.textContent = "[d]";
-  ctx_nox = false;
-  document.cookie = "nox=0";
+  if (dntoggle) {
+    body.classList.remove("nox");
+    dntoggle.textContent = "[d]";
+    ctx_nox = false;
+    document.cookie = "nox=0";
+  }
 };
 var nox = function () {
   var body = document.querySelector("body");
   var dntoggle = document.querySelector("#dntoggle");
-  body.classList.add("nox");
-  dntoggle.textContent = "[n]";
-  ctx_nox = true;
-  document.cookie = "nox=1";
+  if (dntoggle) {
+    body.classList.add("nox");
+    dntoggle.textContent = "[n]";
+    ctx_nox = true;
+    document.cookie = "nox=1";
+  }
 };
 var render_latex = function (elem) {
   renderMathInElement(
@@ -188,12 +192,14 @@ var on_dntoggle = function (e) {
     nox();
   }
   var dntoggle = document.querySelector("#dntoggle");
-  if (document.activeElement == dntoggle) {
+  if (dntoggle && (document.activeElement == dntoggle)) {
     dntoggle.blur();
   }
 };
-document.querySelector("#dntoggle")
-  .addEventListener("click", on_dntoggle);
+var dntoggle = document.querySelector("#dntoggle");
+if (dntoggle) {
+  dntoggle.addEventListener("click", on_dntoggle);
+}
 if (!ctx_post_seq_nr) {
   req_hi();
 }
