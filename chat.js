@@ -98,7 +98,7 @@ var post_out = function (nr, prefix, contents) {
 var on_keydown = function (e) {
   if ((e.which || e.keyCode || 0) === 13 && !e.shiftKey) {
     e.preventDefault();
-    e.target.form.dispatchEvent(new Event("submit", {cancelable: true}));
+    e.target.form.dispatchEvent(new Event("submit", {"cancelable": true}));
   }
 };
 document.querySelector("#ask")
@@ -217,12 +217,12 @@ var on_example = function (idx) {
   var ex_vals = examples.querySelectorAll(".ex_value");
   for (var idx = 0; idx < ex_vals.length; idx++) {
     var s = ex_vals[idx].textContent.trim();
-    console.log("DEBUG: ex[" + idx + "]=" + s);
+    //console.log("DEBUG: ex[" + idx + "]=" + s);
     ctx_ex_texts.push(s);
   }
   var a_s = examples.querySelectorAll("a");
   for (var idx = 0; idx < a_s.length; idx++) {
-    console.log("DEBUG: a[" + idx + "]");
+    //console.log("DEBUG: a[" + idx + "]");
     a_s[idx].addEventListener("click", on_example(idx));
   }
   render_latex(examples);
