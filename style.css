@@ -10,14 +10,14 @@ h1 a { text-decoration: none; }
 #dntoggle { text-decoration: none; color: #666; }
 #dntoggle:hover, #dntoggle:focus { color: #333; }
 #container { width: 518px; margin-left: auto; margin-right: auto; background-color: #f9f9f9; }
-#header { position: fixed; top: 0; z-index: 1; width: 518px; padding-left: 9px; padding-right: 9px; border-bottom: 3px solid #bcf682; background-color: #fff; }
+#header { position: fixed; top: 0; z-index: 1; width: 100%; padding-left: 9px; padding-right: 9px; border-bottom: 3px solid #bcf682; background-color: #fff; }
 #chatwraptop { height: 39px; background-color: #f9f9f9; }
-#chatwrap { width: 518px; /*padding-left: 9px; padding-right: 9px;*/ }
-#chat { width: 518px; padding: 9px; background-color: #f9f9f9; }
+#chatwrap { width: 100%; }
+#chat { width: 100%; padding: 9px; background-color: #f9f9f9; }
 #chatwrapbot { height: 108px; background-color: #ededed; }
 #askwrap { position: fixed; bottom: 0; z-index: 2; height: 108px; padding: 9px; border-top: 1px solid #777; background-color: #fff; }
 #askinst { font-size: 0.75rem; font-style: italic; }
-#ask textarea { display: block; width: 500px; }
+#ask textarea { display: block; width: 100%; padding-left: 9px; padding-right: 9px; }
 #ask button { display: block; }
 .ex_ { padding-top: 9px; background-color: #fffeac; }
 .ex0 { padding-top: 0; }
@@ -44,6 +44,10 @@ h1 a { text-decoration: none; }
 .outvalue {}
 .outsuffix { font-style: italic; }
 #outtemplate { display: none; }
+
+@median screen and (max-device-width: 480px) {
+#container { width: 468px; }
+}
 
 body.nox { background-color: #070707; color: #ededed; }
 .nox a { color: #ededed; }
