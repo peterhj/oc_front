@@ -80,5 +80,5 @@ body.nox { background-color: #070707; color: #ededed; }
 .nox .ex_ { background-color: #351; }
 .nox .ex_label { color: #ededed; }
 .nox .ex_ a { color: #ededed; }
-.nox .ex_ a:hover, .ex_ a:focus { color: #aaa; }
+.nox .ex_ a:hover, .nox .ex_ a:focus { color: #aaa; }
 .nox .out { background-color: #404040; }
