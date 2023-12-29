@@ -46,6 +46,7 @@ h1 a { text-decoration: none; }
 #outtemplate { display: none; }
 
 @media only screen and (min-width: 320px) {
+.rhs_smol { font-size: 0.667rem; }
 #container { width: 306px; }
 #header { width: 306px; }
 #chatwraptop { height: 0; }
@@ -53,6 +54,7 @@ h1 a { text-decoration: none; }
 }
 
 @media only screen and (min-width: 480px) {
+.rhs_smol { font-size: 0.667rem; }
 #container { width: 468px; }
 #header { width: 468px; }
 #chatwraptop { height: 0; }
