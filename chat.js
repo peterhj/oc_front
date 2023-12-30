@@ -1,4 +1,5 @@
 (function () {
+var host = "{{host}}";
 var ctx_nox = false;
 var ctx_conv_id = null;
 var ctx_post_inc = 0;
@@ -114,7 +115,7 @@ var on_keydown = function (e) {
 $("#ask").addEventListener("keydown", on_keydown);
 var req_hi = function () {
   var req = new XMLHttpRequest();
-  req.open("POST", "{{host}}/wapi/hi", true);
+  req.open("POST", host.concat("/wapi/hi"), true);
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status == 201) {
       //console.log("hi " + req.status);
@@ -134,7 +135,7 @@ var fresh = function () {
 var req_post = function (params) {
   var req = new XMLHttpRequest();
   req.overrideMimeType("application/json");
-  req.open("POST", "{{host}}/wapi/post", true);
+  req.open("POST", host.concat("/wapi/post"), true);
   req.setRequestHeader("Content-Type", "application/json");
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status != 201) {
