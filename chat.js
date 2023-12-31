@@ -79,7 +79,7 @@ var post_in_ = function (nr, content) {
     ctx_post_texts.push(content);
   }
 };
-var post_out = function (nr, prefix, contents) {
+var post_out = function (nr, prefix, contents, svg_content) {
   var chat = $("#chat");
   var tmp = $("#outtemplate");
   var tmp2 = tmp.cloneNode(true);
@@ -95,6 +95,10 @@ var post_out = function (nr, prefix, contents) {
     tmp2.querySelector(".outvalue").appendChild(document.createTextNode(content));
   }
   //tmp2.querySelector(".outsuffix").textContent = suffix;
+  if (svg_content) {
+    tmp2.querySelector(".outimage").classList.remove("hide");
+    tmp2.querySelector(".outimage").innerHTML = svg_content;
+  }
   render_latex(tmp2);
   chat.appendChild(tmp2);
   window.scrollBy(0, document.body.scrollHeight);
@@ -145,7 +149,7 @@ var req_post = function (params) {
       //console.log("post: err=" + rep.err);
       // TODO TODO
       if (rep.err) {
-        post_out(params.seq_nr, "[Exception: DecodeError: please see highlighted text (above)]", []);
+        post_out(params.seq_nr, "[Exception: DecodeError: please see highlighted text (above)]", [], null);
         //console.log("post:   mark start=" + rep.mrk_s + " end=" + rep.mrk_e);
         var last = $$$(".in_value")[params.seq_nr];
         var text = ctx_post_texts[params.seq_nr].concat(" ");
@@ -159,7 +163,7 @@ var req_post = function (params) {
         last.innerHTML = prefix.concat("<span class=\"in_mrk\">", pat, "</span>", suffix);
         render_latex(last);
       } else {
-        post_out(params.seq_nr, "[OK]", rep.val);
+        post_out(params.seq_nr, "[OK]", rep.val, rep.svg);
       }
     }
   };
