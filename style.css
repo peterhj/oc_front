@@ -44,7 +44,7 @@ h1 a { text-decoration: none; }
 .outprefix { font-style: italic; }
 .outvalue {}
 .outsuffix { font-style: italic; }
-.outimage {}
+.outimage { width: 60%; }
 #outtemplate { display: none; }
 
 @media only screen and (min-width: 320px) {
