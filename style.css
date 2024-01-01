@@ -4,7 +4,7 @@ a { color: #000; }
 h1 a { text-decoration: none; }
 .katex { font-size: 1rem; }
 .hide { display: none; }
-.svg_text { font-family: serif; font-size: 1.6rem; font-style: italic; }
+.svg_text { font-size: 1rem; font-family: serif; font-style: italic; }
 .rhs { font-size: 14px; margin-left: 9px; line-height: 36px; }
 .rhs_smol { font-size: 12px; line-height: 36px; }
 .rhs a:hover, .rhs a:focus { color: #666; }
@@ -45,28 +45,34 @@ h1 a { text-decoration: none; }
 .outprefix { font-style: italic; }
 .outvalue {}
 .outsuffix { font-style: italic; }
-.outimage { width: 60%; margin-left: auto; margin-right: auto; }
+.outimage { width: 360px; margin-left: auto; margin-right: auto; }
 #outtemplate { display: none; }
 
 @media only screen and (min-width: 320px) {
+.svg_text { font-size: 1.75rem; }
 .rhs_smol { font-size: 10px; }
 #container { width: 306px; }
 #header { width: 306px; }
 #ask textarea { width: 288px; }
+.outimage { width: 210px; }
 }
 
 @media only screen and (min-width: 480px) {
+.svg_text { font-size: 1.35rem; }
 .rhs_smol { font-size: 10px; }
 #container { width: 468px; }
 #header { width: 468px; }
 #ask textarea { width: 450px; }
+.outimage { width: 270px; }
 }
 
 @media only screen and (min-width: 640px) {
+.svg_text { font-size: 1rem; }
 .rhs_smol { font-size: 12px; }
 #container { width: 630px; }
 #header { width: 630px; }
 #ask textarea { width: 612px; }
+.outimage { width: 360px; }
 }
 
 body.nox { background-color: #070707; color: #ededed; }
