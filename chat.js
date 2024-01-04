@@ -9,11 +9,13 @@ var ctx_reply_seq_nr = 0;
 var ctx_poll_req = null;
 var ctx_ex_texts = [];
 var ctx_post_texts = [null];
-var $ = function (q) {
-  return document.querySelector(q);
+var $ = function (b, a) {
+  return document.querySelector(b);
+  //return ((a && b) || document).querySelector(a || b);
 };
-var $$$ = function (q) {
-  return document.querySelectorAll(q);
+var $$$ = function (b, a) {
+  return document.querySelectorAll(b);
+  //return ((a && b) || document).querySelectorAll(a || b);
 };
 var day = function () {
   var body = $("body");
@@ -120,8 +122,14 @@ $("#ask").addEventListener("keydown", on_keydown);
 var req_hi = function () {
   var req = new XMLHttpRequest();
   req.open("POST", host.concat("/wapi/hi"), true);
+  req.timeout = 2000;
+  req.ontimeout = function () {
+    post_sys(0, "[Could not connect to the server.]");
+  };
   req.onreadystatechange = function () {
-    if (req.readyState == 4 && req.status == 201) {
+    if (req.readyState == 4 && req.status != 201) {
+      post_sys(0, "[Server handshake failed, please refresh the page.]");
+    } else if (req.readyState == 4 && req.status == 201) {
       //console.log("hi " + req.status);
       var rep = JSON.parse(req.response);
       //console.log("hi: seq_nr=" + rep.seq_nr);
@@ -141,6 +149,10 @@ var req_post = function (params) {
   req.overrideMimeType("application/json");
   req.open("POST", host.concat("/wapi/post"), true);
   req.setRequestHeader("Content-Type", "application/json");
+  req.timeout = 2000;
+  req.ontimeout = function () {
+    post_sys(params.seq_nr, "[Could not connect to the server.]");
+  };
   req.onreadystatechange = function () {
     if (req.readyState == 4 && req.status != 201) {
       post_sys(params.seq_nr, "[Server unresponsive, please retry your request.]");
